@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WorldAID until USAID comes back</title>
+  <style>
+    :root {
+      --bg: #0f172a;        /* slate-900 */
+      --panel: #111827;     /* gray-900 */
+      --muted: #9ca3af;     /* gray-400 */
+      --text: #e5e7eb;      /* gray-200 */
+      --brand: #22c55e;     /* green-500 */
+      --brand-2: #06b6d4;   /* cyan-500 */
+      --accent: #f59e0b;    /* amber-500 */
+      --danger: #ef4444;    /* red-500 */
+      --ring: rgba(34,197,94,.35);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: radial-gradient(1200px 800px at 20% -10%, rgba(6,182,212,.2), transparent), radial-gradient(1000px 700px at 90% 10%, rgba(245,158,11,.12), transparent), var(--bg); color: var(--text); }
+    header { position: sticky; top: 0; backdrop-filter: blur(10px); background: rgba(15,23,42,.6); border-bottom: 1px solid rgba(148,163,184,.15); z-index: 10; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 22px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .brand-badge { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; font-weight:900; color:#052e16; box-shadow: 0 10px 30px rgba(34,197,94,.25); }
+    h1 { margin: 0; font-size: clamp(22px, 3vw, 34px); letter-spacing:.2px; }
+    .slogan { color: var(--muted); font-size: clamp(14px, 2vw, 18px); }
+
+    main { padding: 28px 0 60px; }
+    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap: 26px; align-items: stretch; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border: 1px solid rgba(148,163,184,.18); border-radius: 18px; padding: 20px; box-shadow: 0 10px 30px rgba(2,6,23,.45), inset 0 0 0 1px rgba(255,255,255,.02); }
+    .card h2 { margin: 2px 0 10px; font-size: 22px; }
+    .muted { color: var(--muted); }
+
+    /* Progress */
+    .progress { height: 14px; background: rgba(148,163,184,.15); border-radius: 999px; overflow: hidden; box-shadow: inset 0 2px 6px rgba(0,0,0,.35); }
+    .progress > div { height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); transition: width .6s ease; }
+
+    /* Form */
+    label { display:block; font-size: 13px; color: var(--muted); margin: 14px 0 6px; }
+    input, button { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(148,163,184,.28); background: #0b1220; color: var(--text); outline: none; }
+    input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px var(--ring); }
+    .row { display:flex; gap: 12px; }
+    .row > * { flex: 1; }
+    button.primary { cursor: pointer; background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #052e16; font-weight: 800; border: none; box-shadow: 0 10px 24px rgba(13,148,136,.35); margin-top: 14px; }
+    button.secondary { background: transparent; border: 1px dashed rgba(148,163,184,.35); color: var(--text); cursor: pointer; }
+
+    .tiny { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    footer { border-top: 1px solid rgba(148,163,184,.15); padding: 30px 0 60px; color: var(--muted); font-size: 13px; }
+    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.35); font-size: 12px; }
+    .countdown { font-variant-numeric: tabular-nums; display:flex; gap: 12px; flex-wrap: wrap; }
+    .countdown .unit { background: #0b1220; border: 1px solid rgba(148,163,184,.25); padding: 10px 14px; border-radius: 14px; min-width: 110px; text-align: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,.02); }
+    .unit b { display:block; font-size: 22px; }
+    a.link { color: #a5b4fc; text-decoration: none; border-bottom: 1px dotted rgba(165,180,252,.6); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap brand">
+      <div class="brand-badge" aria-hidden="true">WA</div>
+      <div>
+        <h1>WorldAID until USAID comes back</h1>
+        <div class="slogan">“compensating for USAID for every child—tysm world!!!”</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <!-- Left: Campaign panel -->
+      <div class="card">
+        <div class="pill" id="days-pill">1000 days mission</div>
+        <h2>UNICEF Vaccinations Fundraiser</h2>
+        <p class="muted">Help fund life‑saving vaccines for children. This page is a community initiative supporting UNICEF’s mission.</p>
+
+        <div style="margin:14px 0 6px; display:flex; justify-content:space-between; align-items:center; gap:10px;">
+          <div class="muted">Raised: <b id="raised-label">$0</b> of <b id="goal-label">$50,000</b></div>
+          <div class="muted" id="donor-count">0 supporters</div>
+        </div>
+        <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+
+        <div class="countdown" style="margin-top:16px;">
+          <div class="unit"><b id="d">1000</b><span class="muted">days</span></div>
+          <div class="unit"><b id="h">00</b><span class="muted">hours</span></div>
+          <div class="unit"><b id="m">00</b><span class="muted">minutes</span></div>
+          <div class="unit"><b id="s">00</b><span class="muted">seconds</span></div>
+        </div>
+      </div>
+
+      <!-- Right: Donation form -->
+      <div class="card">
+        <h2>Make a pledge</h2>
+        <form id="donation-form">
+          <label for="amount">Amount (USD)</label>
+          <input id="amount" name="amount" type="number" min="1" step="1" placeholder="25" required />
+
+          <div class="row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <button class="primary" type="submit">Pledge now</button>
+          <button class="secondary" type="button" id="unicef-btn" style="margin-top:10px">Donate via UNICEF</button>
+          <p class="tiny" style="margin-top:10px">This site records community pledges (client‑side) and links you to UNICEF for secure payment. It is not affiliated with UNICEF or USAID.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Impact section -->
+    <section style="margin-top:26px;" class="card">
+      <h2>Impact tracker</h2>
+      <p class="muted">Every $1 can help deliver vaccines and cold‑chain support. The estimate below is illustrative.</p>
+      <div class="row">
+        <div class="card" style="flex:1; background:rgba(34,197,94,.06)">
+          <h3 style="margin:0 0 6px;">Estimated vaccinations enabled</h3>
+          <div style="font-size:28px; font-variant-numeric: tabular-nums;"><b id="impact-vax">0</b></div>
+          <div class="tiny">Assuming ~$1 per dose on average (varies by country & program).</div>
+        </div>
+        <div class="card" style="flex:1; background:rgba(6,182,212,.06)">
+          <h3 style="margin:0 0 6px;">Average pledge</h3>
+          <div style="font-size:28px; font-variant-numeric: tabular-nums;"><b id="avg-pledge">$0</b></div>
+          <div class="tiny">Based on pledges recorded in your browser.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feed -->
+    <section style="margin-top:26px;" class="card">
+      <h2>Recent supporters</h2>
+      <div id="feed" class="tiny" style="display:grid; gap:10px;"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="year"></span> WorldAID — community‑run page. <span class="muted">“1000 days” countdown runs from the moment you open the page.</span></div>
+      <div style="margin-top:6px;">For verified giving, please use the <a class="link" id="unicef-link" href="#" target="_blank" rel="noopener">official UNICEF donation page</a>.</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Config ---
+    const GOAL = 50000;            // Goal in USD
+    const DOSE_COST_EST = 1;       // $ per vaccine dose (illustrative)
+
+    // --- Elements ---
+    const bar = document.getElementById('bar');
+    const raisedLabel = document.getElementById('raised-label');
+    const goalLabel = document.getElementById('goal-label');
+    const donorCount = document.getElementById('donor-count');
+    const impactVax = document.getElementById('impact-vax');
+    const avgPledge = document.getElementById('avg-pledge');
+    const feed = document.getElementById('feed');
+
+    // --- State persisted in localStorage ---
+    const state = JSON.parse(localStorage.getItem('worldaid_state') || '{"total":0,"donors":0,"items":[]}');
+
+    function fmtUSD(n){ return '$' + n.toLocaleString(undefined, {maximumFractionDigits:0}); }
+
+    function render(){
+      goalLabel.textContent = fmtUSD(GOAL);
+      raisedLabel.textContent = fmtUSD(state.total);
+      donorCount.textContent = `${state.donors} supporter${state.donors===1?'':'s'}`;
+      const pct = Math.min(100, (state.total/GOAL)*100);
+      bar.style.width = pct + '%';
+      impactVax.textContent = Math.floor(state.total / DOSE_COST_EST).toLocaleString();
+      avgPledge.textContent = state.donors ? fmtUSD(Math.round(state.total/state.donors)) : '$0';
+      feed.innerHTML = state.items.slice().reverse().map(x => `
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+          <div><b>${x.name}</b> pledged <b>${fmtUSD(x.amount)}</b></div>
+          <div class="muted">${new Date(x.ts).toLocaleString()}</div>
+        </div>`).join('');
+    }
+
+    function save(){ localStorage.setItem('worldaid_state', JSON.stringify(state)); }
+
+    document.getElementById('donation-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const amount = Math.max(1, Math.floor(+document.getElementById('amount').value || 0));
+      const name = document.getElementById('name').value.trim() || 'Anonymous';
+      const email = document.getElementById('email').value.trim();
+      // Update local state
+      state.total += amount;
+      state.donors += 1;
+      state.items.push({name, amount, email, ts: Date.now()});
+      save();
+      render();
+      // Hand off to UNICEF official donation page (new tab)
+      window.open(getUnicefUrl(amount), '_blank', 'noopener');
+      alert('Thanks for pledging! A new tab will open to complete a donation on UNICEF.');
+      e.target.reset();
+    });
+
+    // Link / button to UNICEF official page
+    document.getElementById('unicef-btn').addEventListener('click', () => {
+      window.open(getUnicefUrl(), '_blank', 'noopener');
+    });
+
+    function getUnicefUrl(amount){
+      // Generic UNICEF donations hub (region may redirect). Amount is appended if present.
+      const base = 'https://www.unicef.org/donate';
+      return amount ? `${base}?amount=${encodeURIComponent(amount)}` : base;
+    }
+
+    document.getElementById('unicef-link').href = getUnicefUrl();
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- 1000 days countdown ---
+    const START = Date.now();
+    const TARGET = START + 1000 * 24 * 60 * 60 * 1000; // now + 1000 days
+    const dEl = document.getElementById('d');
+    const hEl = document.getElementById('h');
+    const mEl = document.getElementById('m');
+    const sEl = document.getElementById('s');
+
+    function tick(){
+      const now = Date.now();
+      let ms = Math.max(0, TARGET - now);
+      const days = Math.floor(ms / (24*60*60*1000)); ms -= days*(24*60*60*1000);
+      const hours = Math.floor(ms / (60*60*1000)); ms -= hours*(60*60*1000);
+      const mins = Math.floor(ms / (60*1000)); ms -= mins*(60*1000);
+      const secs = Math.floor(ms / 1000);
+      dEl.textContent = days;
+      hEl.textContent = String(hours).padStart(2,'0');
+      mEl.textContent = String(mins).padStart(2,'0');
+      sEl.textContent = String(secs).padStart(2,'0');
+      if (days === 0 && hours === 0 && mins === 0 && secs === 0) clearInterval(timer);
+    }
+    const timer = setInterval(tick, 1000); tick();
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>
